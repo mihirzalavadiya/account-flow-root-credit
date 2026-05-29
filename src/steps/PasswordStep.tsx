@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Button from '../components/Button';
 import closeEyeIcon from '../assets/closeeye.svg';
 import openEyeIcon from '../assets/openeye.svg';
@@ -15,6 +15,13 @@ const PasswordStep: React.FC<PasswordStepProps> = ({ onNext, onBack }) => {
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
   const [error, setError] = useState<string>('');
+
+  const [passwordError, setPasswordError] = useState<boolean>(false);
+  const [confirmPasswordError, setConfirmPasswordError] =
+    useState<boolean>(false);
+
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const confirmPasswordRef = useRef<HTMLInputElement>(null);
 
   const getPasswordStrength = () => {
     if (!password) return { score: 0, text: '', colorClass: '' };
@@ -37,13 +44,27 @@ const PasswordStep: React.FC<PasswordStepProps> = ({ onNext, onBack }) => {
   const handleSubmit = () => {
     if (strength.score < 3) {
       setError('Please fulfill all criteria to make a Strong password');
+      setPasswordError(true);
+      setConfirmPasswordError(false);
+      if (passwordRef.current) {
+        passwordRef.current.focus();
+      }
       return;
     }
+
     if (password !== confirmPassword) {
       setError('Both passwords must match');
+      setConfirmPasswordError(true);
+      setPasswordError(false);
+      if (confirmPasswordRef.current) {
+        confirmPasswordRef.current.focus();
+      }
       return;
     }
+
     setError('');
+    setPasswordError(false);
+    setConfirmPasswordError(false);
     onNext(password);
   };
 
@@ -62,11 +83,18 @@ const PasswordStep: React.FC<PasswordStepProps> = ({ onNext, onBack }) => {
           <label className="input-label">Enter new password</label>
           <div className="password-input-wrapper">
             <input
+              ref={passwordRef}
               type={showPassword ? 'text' : 'password'}
-              className="input-text-element padding-right-input"
+              className={`input-text-element padding-right-input ${
+                passwordError ? 'input-error-border' : ''
+              }`}
               placeholder="Enter new password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                if (passwordError) setPasswordError(false);
+                if (error) setError('');
+              }}
             />
             <span
               className="password-toggle-icon"
@@ -125,11 +153,18 @@ const PasswordStep: React.FC<PasswordStepProps> = ({ onNext, onBack }) => {
           <label className="input-label">Confirm password</label>
           <div className="password-input-wrapper">
             <input
+              ref={confirmPasswordRef}
               type={showConfirmPassword ? 'text' : 'password'}
-              className="input-text-element padding-right-input"
+              className={`input-text-element padding-right-input ${
+                confirmPasswordError ? 'input-error-border' : ''
+              }`}
               placeholder="Confirm password"
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+                if (confirmPasswordError) setConfirmPasswordError(false);
+                if (error) setError('');
+              }}
             />
             <span
               className="password-toggle-icon"

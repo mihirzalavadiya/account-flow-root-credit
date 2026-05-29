@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Button from '../components/Button';
 
 interface NameStepProps {
@@ -21,29 +21,52 @@ const NameStep: React.FC<NameStepProps> = ({
   const [email, setEmail] = useState<string>(emailValue);
   const [emailError, setEmailError] = useState<string>('');
 
+  const [firstNameError, setFirstNameError] = useState<boolean>(false);
+  const [lastNameError, setLastNameError] = useState<boolean>(false);
+
+  const firstNameRef = useRef<HTMLInputElement>(null);
+  const lastNameRef = useRef<HTMLInputElement>(null);
+
   const handleNameChange = (
     value: string,
-    setter: React.Dispatch<React.SetStateAction<string>>
+    setter: React.Dispatch<React.SetStateAction<string>>,
+    errorSetter: React.Dispatch<React.SetStateAction<boolean>>
   ) => {
     if (value.includes('  ')) return;
     if (/^[a-zA-Z\s]*$/.test(value)) {
       setter(value);
+      errorSetter(false);
     }
   };
 
   const validateEmail = (value: string) => {
     if (value.trim() === '') {
-      return true; // Khali hai toh chalega kyunki optional hai
+      return true;
     }
-    // Sahi email format ka regex check
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(value);
   };
 
   const handleSubmit = () => {
-    if (firstName.trim() === '' || lastName.trim() === '') {
-      return; // First aur Last name zaroori hain
+    let isValid = true;
+
+    if (firstName.trim() === '') {
+      setFirstNameError(true);
+      if (isValid && firstNameRef.current) {
+        firstNameRef.current.focus();
+      }
+      isValid = false;
     }
+
+    if (lastName.trim() === '') {
+      setLastNameError(true);
+      if (isValid && lastNameRef.current) {
+        lastNameRef.current.focus();
+      }
+      isValid = false;
+    }
+
+    if (!isValid) return;
 
     if (!validateEmail(email)) {
       setEmailError('Please enter a valid email address');
@@ -66,22 +89,32 @@ const NameStep: React.FC<NameStepProps> = ({
         <div className="input-field-block">
           <label className="input-label">First Name</label>
           <input
+            ref={firstNameRef}
             type="text"
-            className="input-text-element"
+            className={`input-text-element ${
+              firstNameError ? 'input-error-border' : ''
+            }`}
             placeholder="Oliver"
             value={firstName}
-            onChange={(e) => handleNameChange(e.target.value, setFirstName)}
+            onChange={(e) =>
+              handleNameChange(e.target.value, setFirstName, setFirstNameError)
+            }
           />
         </div>
 
         <div className="input-field-block">
           <label className="input-label">Last Name</label>
           <input
+            ref={lastNameRef}
             type="text"
-            className="input-text-element"
+            className={`input-text-element ${
+              lastNameError ? 'input-error-border' : ''
+            }`}
             placeholder="Last Name"
             value={lastName}
-            onChange={(e) => handleNameChange(e.target.value, setLastName)}
+            onChange={(e) =>
+              handleNameChange(e.target.value, setLastName, setLastNameError)
+            }
           />
         </div>
 
@@ -98,7 +131,7 @@ const NameStep: React.FC<NameStepProps> = ({
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
-              if (emailError) setEmailError(''); // Type karte hi error hata do
+              if (emailError) setEmailError('');
             }}
           />
           {emailError && <p className="email-error-msg">{emailError}</p>}

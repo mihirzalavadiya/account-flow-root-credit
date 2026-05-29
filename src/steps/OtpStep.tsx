@@ -8,6 +8,7 @@ interface OtpStepProps {
 
 const OtpStep: React.FC<OtpStepProps> = ({ onNext, onBack }) => {
   const [otp, setOtp] = useState<string[]>(['', '', '', '']);
+  const [hasError, setHasError] = useState<boolean>(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const handleChange = (value: string, index: number) => {
@@ -16,6 +17,8 @@ const OtpStep: React.FC<OtpStepProps> = ({ onNext, onBack }) => {
     const newOtp = [...otp];
     newOtp[index] = value.substring(value.length - 1);
     setOtp(newOtp);
+
+    if (hasError) setHasError(false);
 
     if (value && index < 3) {
       inputRefs.current[index + 1]?.focus();
@@ -33,9 +36,20 @@ const OtpStep: React.FC<OtpStepProps> = ({ onNext, onBack }) => {
 
   const handleSubmit = () => {
     const otpCode = otp.join('');
-    if (otpCode.length === 4) {
-      onNext(otpCode);
+
+    if (otpCode.length < 4) {
+      setHasError(true);
+
+      const firstEmptyIndex = otp.findIndex((digit) => digit === '');
+      if (firstEmptyIndex !== -1 && inputRefs.current[firstEmptyIndex]) {
+        inputRefs.current[firstEmptyIndex]?.focus();
+      } else if (inputRefs.current[0]) {
+        inputRefs.current[0]?.focus();
+      }
+      return;
     }
+
+    onNext(otpCode);
   };
 
   return (
@@ -62,7 +76,9 @@ const OtpStep: React.FC<OtpStepProps> = ({ onNext, onBack }) => {
               ref={(el) => (inputRefs.current[index] = el)}
               onChange={(e) => handleChange(e.target.value, index)}
               onKeyDown={(e) => handleKeyDown(e, index)}
-              className="otp-box-input"
+              className={`otp-box-input ${
+                hasError && digit === '' ? 'input-error-border' : ''
+              }`}
               placeholder="-"
             />
           ))}

@@ -461,6 +461,14 @@
   color: #1d4ed8;
 }
 
+.input-error-border {
+  border-color: #ef4444 !important;
+}
+
+.input-error-border:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+}
+
 @media (max-width: 1024px) {
   .global-flow-wrapper {
     height: auto;
