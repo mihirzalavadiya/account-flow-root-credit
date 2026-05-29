@@ -4,18 +4,22 @@ import Button from '../components/Button';
 interface NameStepProps {
   firstNameValue: string;
   lastNameValue: string;
-  onNext: (firstName: string, lastName: string) => void;
+  emailValue: string;
+  onNext: (firstName: string, lastName: string, email: string) => void;
   onBack: () => void;
 }
 
 const NameStep: React.FC<NameStepProps> = ({
   firstNameValue,
   lastNameValue,
+  emailValue,
   onNext,
   onBack,
 }) => {
   const [firstName, setFirstName] = useState<string>(firstNameValue);
   const [lastName, setLastName] = useState<string>(lastNameValue);
+  const [email, setEmail] = useState<string>(emailValue);
+  const [emailError, setEmailError] = useState<string>('');
 
   const handleNameChange = (
     value: string,
@@ -27,10 +31,27 @@ const NameStep: React.FC<NameStepProps> = ({
     }
   };
 
-  const handleSubmit = () => {
-    if (firstName.trim() !== '' && lastName.trim() !== '') {
-      onNext(firstName.trim(), lastName.trim());
+  const validateEmail = (value: string) => {
+    if (value.trim() === '') {
+      return true; // Khali hai toh chalega kyunki optional hai
     }
+    // Sahi email format ka regex check
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(value);
+  };
+
+  const handleSubmit = () => {
+    if (firstName.trim() === '' || lastName.trim() === '') {
+      return; // First aur Last name zaroori hain
+    }
+
+    if (!validateEmail(email)) {
+      setEmailError('Please enter a valid email address');
+      return;
+    }
+
+    setEmailError('');
+    onNext(firstName.trim(), lastName.trim(), email.trim());
   };
 
   return (
@@ -62,6 +83,25 @@ const NameStep: React.FC<NameStepProps> = ({
             value={lastName}
             onChange={(e) => handleNameChange(e.target.value, setLastName)}
           />
+        </div>
+
+        <div className="input-field-block">
+          <label className="input-label">
+            Email <span className="optional-text">(Optional)</span>
+          </label>
+          <input
+            type="email"
+            className={`input-text-element ${
+              emailError ? 'input-error-border' : ''
+            }`}
+            placeholder="oliver@example.com"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              if (emailError) setEmailError(''); // Type karte hi error hata do
+            }}
+          />
+          {emailError && <p className="email-error-msg">{emailError}</p>}
         </div>
       </div>
 

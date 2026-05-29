@@ -120,9 +120,10 @@ const AccountFlow = () => {
             <NameStep
               firstNameValue={firstNameVal}
               lastNameValue={lastNameVal}
+              emailValue={formData.email}
               onBack={handleBack}
-              onNext={(first, last) =>
-                handleNext({ fullName: `${first} ${last}` })
+              onNext={(first, last, emailVal) =>
+                handleNext({ fullName: `${first} ${last}`, email: emailVal })
               }
             />
           )}

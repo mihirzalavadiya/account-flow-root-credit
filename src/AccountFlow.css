@@ -211,14 +211,18 @@
 
 .btn-back {
   background: none;
-  border: 1.5px solid #e2e8f0;
   padding: 14px 45px;
-  border-radius: 30px;
-  color: #1d4ed8;
-  font-size: 15px;
-  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  width: 250px !important;
+  height: 49px !important;
+  border-radius: 38px !important;
+  border: 2px solid #d9e0e6 !important;
+  background-color: #ffffff !important;
+  font-family: 'Rubik', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  color: #0054fd !important;
 }
 
 .btn-back:hover {
@@ -227,16 +231,25 @@
 }
 
 .btn-continue {
-  background-color: #1d4ed8;
-  border: none;
   padding: 14px 55px;
-  border-radius: 30px;
-  color: #ffffff;
-  font-size: 15px;
-  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 4px 10px rgba(29, 78, 216, 0.2);
+  width: 250px !important;
+  height: 49px !important;
+  border-radius: 38px !important;
+  background-color: #0054fd !important;
+  border: none !important;
+  font-family: 'Rubik', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  color: #ffffff !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease;
 }
 
 .btn-continue:hover {
@@ -345,11 +358,13 @@
 .country-selector {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 8px;
-  padding: 0 16px;
-  height: 56px;
+  padding: 16px 8px;
+  width: 93px;
+  height: 76px;
   border: 1.5px solid #cbd5e1;
-  border-radius: 12px;
+  border-radius: 16px;
   background-color: #ffffff;
   cursor: pointer;
   box-sizing: border-box;
@@ -378,10 +393,10 @@
 
 .mobile-text-input {
   flex: 1;
-  height: 56px;
+  height: 76px;
   border: 1.5px solid #cbd5e1;
-  border-radius: 12px;
-  padding: 0 20px;
+  border-radius: 16px;
+  padding: 16px 8px;
   font-family: 'Rubik', sans-serif;
   font-size: 16px;
   color: #334155;

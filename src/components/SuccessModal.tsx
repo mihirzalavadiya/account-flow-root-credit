@@ -34,16 +34,19 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
             <span className="summary-label">Account Type</span>
             <span className="summary-value">{accountType}</span>
           </div>
-          <div className="summary-row">
-            <span className="summary-label">Email</span>
-            <span className="summary-value">
-              {email || 'jo••••@example.com'}
-            </span>
-          </div>
+
+          {email.trim() !== '' && (
+            <div className="summary-row">
+              <span className="summary-label">Email</span>
+              <span className="summary-value">{email}</span>
+            </div>
+          )}
+
           <div className="summary-row">
             <span className="summary-label">Name</span>
             <span className="summary-value">{fullName}</span>
           </div>
+
           <div className="summary-row">
             <span className="summary-label">Mobile Number</span>
             <span className="summary-value">{mobileNumber}</span>
