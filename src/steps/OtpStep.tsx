@@ -73,7 +73,9 @@ const OtpStep: React.FC<OtpStepProps> = ({ onNext, onBack }) => {
               inputMode="numeric"
               maxLength={1}
               value={digit}
-              ref={(el) => (inputRefs.current[index] = el)}
+              ref={(el) => {
+                inputRefs.current[index] = el;
+              }}
               onChange={(e) => handleChange(e.target.value, index)}
               onKeyDown={(e) => handleKeyDown(e, index)}
               className={`otp-box-input ${

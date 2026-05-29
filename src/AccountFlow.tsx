@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import signupIllustration from './assets/signuo-illustration.svg';
 import artBoard11 from './assets/artboard11.svg';
 import AccountType from './steps/AccountType';
