@@ -190,10 +190,14 @@
   object-fit: contain;
 }
 
+/* ==========================================
+   ONLY TABLET BREAKPOINT (max-width: 1024px)
+   ========================================== */
 @media (max-width: 1024px) {
   .form-card {
     max-width: 100%;
-    margin-top: 0;
+    width: 90%;
+    margin: 40px auto;
     padding: 40px 30px;
     height: auto;
     max-height: none;
@@ -202,22 +206,28 @@
 
 @media (max-width: 768px) {
   .form-card {
+    width: 100%;
     height: auto;
     max-height: none;
-    padding: 30px 24px;
-    box-shadow: none;
-    background-color: transparent;
+    padding: 24px 20px; /* Clean internal padding */
+    margin-top: -10px; /* Minus margin se ye illustration panel ke aur paas upar chadh jayega */
+    background-color: #ffffff !important; /* Desktop wala white box container wapas laya */
+    border-radius: 16px; /* Smooth rounded corners shadow ke sath */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important; /* Premium container depth shadow */
+    box-sizing: border-box;
   }
 
   .card-heading {
     font-size: 18px;
     margin-bottom: 24px;
     text-align: center;
+    line-height: 1.4;
   }
 
   .option-item {
-    padding: 16px 20px;
+    padding: 16px;
     border-radius: 12px;
+    height: 62px;
   }
 
   .option-label {
@@ -226,14 +236,16 @@
 
   .action-footer {
     padding-top: 24px;
-    flex-direction: column-reverse;
+    /* flex-direction: column-reverse; */
     gap: 12px;
+    width: 100%;
   }
 
   .btn-back,
   .btn-continue {
-    width: 100%;
-    padding: 14px 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 14px 0 !important;
     text-align: center;
     box-sizing: border-box;
   }

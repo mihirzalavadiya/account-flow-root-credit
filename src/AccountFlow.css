@@ -511,7 +511,7 @@
   .global-left-section {
     flex: 0 0 auto;
     width: 100%;
-    height: 380px;
+    height: 310px;
     margin-bottom: 30px;
   }
 
@@ -524,8 +524,9 @@
 
   .illustration-text-content {
     position: relative;
-    top: 0;
-    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     text-align: center;
     margin-bottom: 20px;
   }
@@ -569,5 +570,16 @@
   }
   .phone-input-wrapper {
     flex-direction: row;
+  }
+
+  .country-selector {
+    width: 80px;
+    height: 62px;
+    padding: 12px 8px;
+  }
+
+  .mobile-text-input {
+    height: 62px;
+    padding: 12px 8px;
   }
 }
