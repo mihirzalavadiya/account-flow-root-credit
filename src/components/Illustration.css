@@ -54,9 +54,6 @@
   opacity: 0.8;
 }
 
-/* ==========================================
-   ONLY TABLET BREAKPOINT (max-width: 1024px)
-   ========================================== */
 @media (max-width: 1024px) {
   .illustration-text-content {
     left: 40px;
@@ -79,13 +76,10 @@
   }
 }
 
-/* ==========================================
-     ONLY MOBILE BREAKPOINT (max-width: 768px)
-     ========================================== */
 @media (max-width: 768px) {
   .illustration-container {
     height: auto;
-    padding: 24px 16px 0px 16px; /* Bottom padding zero ki taaki niche gap na bane */
+    padding: 24px 16px 0px 16px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;

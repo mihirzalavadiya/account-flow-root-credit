@@ -462,36 +462,79 @@
 }
 
 @media (max-width: 1024px) {
+  .global-flow-wrapper {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+    display: block;
+  }
+
   .global-content-layer {
-    max-width: 100%;
-    padding: 0 40px;
+    flex-direction: column !important;
+    max-width: 90%;
+    padding: 40px 24px;
+    height: auto;
+    display: flex;
   }
 
   .global-left-section {
-    flex: 0 0 45%;
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    height: auto !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
   }
 
   .global-right-section {
-    flex: 0 0 55%;
-    padding-left: 0;
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    height: auto !important;
+    display: flex;
+    justify-content: center;
+    padding-left: 0 !important;
   }
 
   .illustration-text-content {
-    left: 40px;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20px;
   }
 
   .char-art {
-    left: 40px;
-    max-width: 100%;
-    max-height: 350px;
+    position: relative !important;
+    display: block !important;
+    top: auto !important;
+    left: auto !important;
+    bottom: auto !important;
+    width: 100%;
+    max-width: 260px;
+    height: auto;
+    max-height: 180px;
+    margin: 0 auto;
+    object-fit: contain;
   }
 
   .form-card {
-    max-width: 100%;
-    margin-left: 0;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-top: 20px !important;
     padding: 40px 30px;
     height: auto;
-    max-height: none;
+    max-height: none !important;
+    background-color: #ffffff !important;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
   }
 }
 
