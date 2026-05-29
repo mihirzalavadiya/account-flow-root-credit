@@ -1,3 +1,7 @@
 @import './AccountFlow.css';
 @import './components/Illustration.css';
 @import './steps/AccountType.css';
+@import './steps/OtpStep.css';
+@import './steps/NameStep.css';
+@import './steps/PasswordStep.css';
+@import './components/SuccessModal.css';

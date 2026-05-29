@@ -1,0 +1,38 @@
+.progress-line.step-4 {
+  width: 80%;
+}
+
+.fields-layout-gap {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.input-field-block {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.input-text-element {
+  width: 100%;
+  height: 56px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 12px;
+  padding: 0 20px;
+  font-family: 'Rubik', sans-serif;
+  font-size: 16px;
+  color: #334155;
+  outline: none;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.input-text-element:focus {
+  border-color: #1d4ed8;
+  box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1);
+}
+
+.input-text-element::placeholder {
+  color: #cbd5e1;
+}

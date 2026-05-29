@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../components/Button';
 
 interface AccountTypeProps {
   selectedType: string;
@@ -55,10 +56,12 @@ const AccountType: React.FC<AccountTypeProps> = ({
       </div>
 
       <div className="action-footer">
-        <button className="btn-back">Back</button>
-        <button className="btn-continue" onClick={() => onNext(selectedType)}>
-          Continue
-        </button>
+        <Button type="back" text="Back" />
+        <Button
+          type="continue"
+          text="Continue"
+          onClick={() => onNext(selectedType)}
+        />
       </div>
     </div>
   );
