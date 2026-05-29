@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '../components/Button';
 
 interface MobileStepProps {
@@ -14,13 +14,8 @@ interface CountryOption {
 }
 
 const MobileStep: React.FC<MobileStepProps> = ({ value, onNext, onBack }) => {
-  const [mobileNumber, setMobileNumber] = useState<string>(value);
+  const [mobileNumber, setMobileNumber] = useState<string>('');
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedCountry, setSelectedCountry] = useState<CountryOption>({
-    code: '+1',
-    flag: '🇺🇸',
-    name: 'USA',
-  });
 
   const countries: CountryOption[] = [
     { code: '+1', flag: '🇺🇸', name: 'USA' },
@@ -28,6 +23,23 @@ const MobileStep: React.FC<MobileStepProps> = ({ value, onNext, onBack }) => {
     { code: '+44', flag: '🇬🇧', name: 'UK' },
     { code: '+61', flag: '🇦🇺', name: 'Australia' },
   ];
+
+  const [selectedCountry, setSelectedCountry] = useState<CountryOption>(
+    countries[0]
+  );
+
+  useEffect(() => {
+    if (value) {
+      const matchedCountry = countries.find((c) => value.startsWith(c.code));
+      if (matchedCountry) {
+        setSelectedCountry(matchedCountry);
+        const pureNumber = value.replace(matchedCountry.code, '').trim();
+        setMobileNumber(pureNumber);
+      } else {
+        setMobileNumber(value);
+      }
+    }
+  }, [value]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
@@ -43,7 +55,7 @@ const MobileStep: React.FC<MobileStepProps> = ({ value, onNext, onBack }) => {
 
   const handleSubmit = () => {
     if (mobileNumber.trim() !== '') {
-      onNext(`${selectedCountry.code} ${mobileNumber}`);
+      onNext(`${selectedCountry.code} ${mobileNumber.trim()}`);
     }
   };
 

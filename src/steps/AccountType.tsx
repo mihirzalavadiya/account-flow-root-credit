@@ -15,9 +15,9 @@ const AccountType: React.FC<AccountTypeProps> = ({
 }) => {
   return (
     <div className="form-card">
-      <div className="progress-bar-container">
+      {/* <div className="progress-bar-container">
         <div className="progress-line step-1"></div>
-      </div>
+      </div> */}
 
       <h2 className="card-heading">
         To join us tell us{' '}

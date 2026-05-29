@@ -315,11 +315,11 @@
 }
 
 .progress-line.step-1 {
-  width: 25%;
+  /* width: 25%; */
 }
 
 .progress-line.step-2 {
-  width: 50%;
+  width: 25%;
 }
 
 .input-label {
