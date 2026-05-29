@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../components/Button';
+import closeEyeIcon from '../assets/closeeye.svg';
+import openEyeIcon from '../assets/openeye.svg';
 
 interface PasswordStepProps {
   onNext: (password: string) => void;
@@ -70,7 +72,11 @@ const PasswordStep: React.FC<PasswordStepProps> = ({ onNext, onBack }) => {
               className="password-toggle-icon"
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? '👁️' : '🙈'}
+              {showPassword ? (
+                <img src={openEyeIcon} alt="openeye" />
+              ) : (
+                <img src={closeEyeIcon} alt="closeeye" />
+              )}
             </span>
           </div>
 
@@ -129,7 +135,11 @@ const PasswordStep: React.FC<PasswordStepProps> = ({ onNext, onBack }) => {
               className="password-toggle-icon"
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
             >
-              {showConfirmPassword ? '👁️' : '🙈'}
+              {showConfirmPassword ? (
+                <img src={openEyeIcon} alt="openeye" />
+              ) : (
+                <img src={closeEyeIcon} alt="closeeye" />
+              )}
             </span>
           </div>
         </div>

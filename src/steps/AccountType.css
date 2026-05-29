@@ -161,6 +161,29 @@
   transform: scale(0.98);
 }
 
+.option-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.custom-svg-icon {
+  color: #132c4a;
+  transition: color 0.2s ease-in-out;
+}
+
+.option-item.selected .custom-svg-icon {
+  color: #0054fd;
+}
+
+.check-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 @media (max-width: 1024px) {
   .form-card {
     max-width: 100%;

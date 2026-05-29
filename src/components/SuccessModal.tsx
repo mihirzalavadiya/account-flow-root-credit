@@ -1,5 +1,6 @@
 import React from 'react';
 import tickIcon from '../assets/tick-icon.svg';
+import secuaredIcon from '../assets/secuared.svg';
 
 interface SuccessModalProps {
   accountType: string;
@@ -50,7 +51,9 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
         </div>
 
         <div className="modal-security-badge">
-          <span className="shield-icon">🛡️</span>
+          <span className="shield-icon">
+            <img src={secuaredIcon} alt="secuared" />
+          </span>
           <span className="security-text">
             Your account is secured with bank-grade security
           </span>
